@@ -1,0 +1,23 @@
+{
+	"name": "lessTree",
+	"version": "1.0",
+	"description": "Tool to manipulate tree of parsed less's files",
+	"main": "./lib/main.js",
+	"scripts": {
+		"test": "node tests/main.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/blackhunter/lessTree.git"
+	},
+	"keywords": [
+		"node.js",
+		"less"
+	],
+	"dependencies": {
+		"formidable": "https://github.com/cloudhead/less.js.git"
+	},
+	"author": "Wszerad Martynowski",
+	"email": "wszerad91@gmail.com",
+	"license": "BSD"
+}

@@ -83,7 +83,6 @@ LT.loadStyle(__dirname+'/test.less', function(err, tree){
 			test = fs.readFileSync(__dirname+'/results/result'+i+'.less', 'utf-8');
 			less.parse(test, function(err, tree){
 				result = LT.toLess(tree);
-				console.log(result);
 			});
 			result = result.replace(/\r\n/g, '\n').split('\n');
 			test = test.replace(/\r\n/g, '\n').split('\n');

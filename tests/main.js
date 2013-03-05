@@ -72,4 +72,6 @@ LT.loadStyle(__dirname+'/test.less', function(err, tree){
 		result = LT.toLess(tree).replace(/\s/g,'');
 
 	assert.equal(expected, result);
+
+	console.log('\033[32mAll tests passed!\u001b[0m');
 })

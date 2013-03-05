@@ -2,7 +2,7 @@
 ```
 Editing tool to rules inside less's tree object
 
-npm install https://github.com/blackhunter/lessTree.git
+npm install git://github.com/blackhunter/lessTree.git
 ```
 
 ## lessTree's methods:

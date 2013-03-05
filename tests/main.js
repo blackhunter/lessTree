@@ -1,6 +1,7 @@
 var
 	LT = require('../lib/main.js'),
 	assert = require('assert'),
+	less =  new (require('less').Parser),
 	fs = require('fs');
 
 LT.loadStyle(__dirname+'/test.less', function(err, tree){
@@ -73,5 +74,27 @@ LT.loadStyle(__dirname+'/test.less', function(err, tree){
 
 	assert.equal(expected, result);
 
+	//reverse's parser precise test
+	var i = 1,
+		test, result, j;
+
+	while(true){
+		if(fs.existsSync(__dirname+'/results/result'+i+'.less')){
+			test = fs.readFileSync(__dirname+'/results/result'+i+'.less', 'utf-8');
+			less.parse(test, function(err, tree){
+				result = LT.toLess(tree);
+			});
+			result = result.split('\n');
+			test = test.split('\n');
+			j = test.length;
+			while(j--){
+				assert.equal(test[j],result[j],'Test case nr: '+i+' line: '+j+'\n'+test[j]+' != '+result[j]);
+			}
+			i++;
+		}else{
+			break;
+		}
+	}
+
 	console.log('\033[32mAll tests passed!\u001b[0m');
-})
+});

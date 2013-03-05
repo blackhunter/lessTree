@@ -83,13 +83,15 @@ LT.loadStyle(__dirname+'/test.less', function(err, tree){
 			test = fs.readFileSync(__dirname+'/results/result'+i+'.less', 'utf-8');
 			less.parse(test, function(err, tree){
 				result = LT.toLess(tree);
+				console.log(result);
 			});
-			result = result.split('\n');
-			test = test.split('\n');
+			result = result.replace(/\r\n/g, '\n').split('\n');
+			test = test.replace(/\r\n/g, '\n').split('\n');
 			j = test.length;
 			while(j--){
 				assert.equal(test[j],result[j],'Test case nr: '+i+' line: '+j+'\n'+test[j]+' != '+result[j]);
 			}
+			break;
 			i++;
 		}else{
 			break;

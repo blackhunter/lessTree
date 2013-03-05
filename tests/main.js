@@ -90,7 +90,6 @@ LT.loadStyle(__dirname+'/test.less', function(err, tree){
 			while(j--){
 				assert.equal(test[j],result[j],'Test case nr: '+i+' line: '+j+'\n'+test[j]+' != '+result[j]);
 			}
-			break;
 			i++;
 		}else{
 			break;

@@ -7,12 +7,27 @@ npm install git://github.com/blackhunter/lessTree.git
 
 ## lessTree's methods:
 
+
 ### lessTree.loadStyle(path, callback)
 * **path** - .less file's path
-* **callback** - arguments: err, **"sheet"**
+* **callback** - arguments: err, **sheet object**
 
+
+### lessTree.mapLess(path, tree)
+* **path** - .less file's path
+* **tree** - object parsed with less.Parser
+
+return: **sheet object**
+
+### lessTree.toLess(path, tree)
+* **path** - .less file's path
+* **tree** - object parsed with less.Parser
+
+return: tree object converted back to less
+
+
+## sheet object
 ``` js
-"sheet" object:
 {
 	list: [],				//list of selectors
 	listOut: [],
@@ -22,25 +37,28 @@ npm install git://github.com/blackhunter/lessTree.git
 }
 ```
 
-### lessTree.saveStyle(cords[, callback])
-* **cords** - sheet object(for overwrite existing file) or new localization path
+### sheet.saveStyle([cords, callback])
+* **cords** - new localization path, default localization of loaded file or given in **lessTree.mapLess**
 * **callback** - arguments: err
 
 
-### lessTree.editRule(sheet, selector, now[, old])
-* **sheet** - "sheet" object
+### sheet.editRule(selector, now[, old])
 * **selector** - existing selector like: "div"
 * **now** - object {name: 'color', value:'red'} - rule to add
 * **old** - object {name: 'color'} - rule to delete
 
 
-### lessTree.editSelector(sheet, rule[, fromFile])
-* **sheet** - "sheet" object
+### sheet.editSelector(rule[, fromFile])
 * **rule** - selector like 'div' or index of rule (to delete it)
 * **fromFile** - if false, the selector will by pushed(or deleted) to listOut array of sheet object, else to list array
 
 
-usage:
+### sheet.toLess()
+
+return: tree object converted back to less
+
+
+## usage:
 ``` js
 	var tl = require('lessTree');
 	tl.loadStyle('c://somepath/somefile.less', function(err, sheet){

@@ -72,6 +72,7 @@ lt.loadStyle(__dirname+'/test.less', function(err, tree){
 		expected = fs.readFileSync(__dirname+'/expected.less', 'utf-8').replace(/\s/g,''),
 		result = tree.toLess().replace(/\s/g,'');
 
+	console.log(result);
 	assert.equal(expected, result);
 
 	//reverse's parser precise test

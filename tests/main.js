@@ -1,10 +1,10 @@
 var
-	LT = require('../lib/main.js'),
+	lt = require('../lib/main.js'),
 	assert = require('assert'),
 	less =  new (require('less').Parser),
 	fs = require('fs');
 
-LT.loadStyle(__dirname+'/test.less', function(err, tree){
+lt.loadStyle(__dirname+'/test.less', function(err, tree){
 	//load and mapLess tests
 	assert('list' in tree);
 	assert.equal(tree.list.length, 3);
@@ -27,10 +27,10 @@ LT.loadStyle(__dirname+'/test.less', function(err, tree){
 		selector = tree.list[0],
 		len = tree.selectors[selector].rules.length;
 
-	LT.editProp(tree, selector, {name: 'color', value:'blue'});
-	LT.editProp(tree, selector, {name: 'color', value:'green'});
-	LT.editProp(tree, selector, {name: 'border', value:'1px solid black'});
-	LT.editProp(tree, selector, null, {name: 'color'});
+	tree.editProp(selector, {name: 'color', value:'blue'});
+	tree.editProp(selector, {name: 'color', value:'green'});
+	tree.editProp(selector, {name: 'border', value:'1px solid black'});
+	tree.editProp(selector, null, {name: 'color'});
 
 
 	assert.equal((len+1), tree.selectors[selector].rules.length);
@@ -43,34 +43,34 @@ LT.loadStyle(__dirname+'/test.less', function(err, tree){
 			lenA = tree.list.length,
 			lenB = tree.listOut.length;
 
-	LT.editRule(tree, 'div')
+	tree.editRule('div')
 	assert.equal(lenA, tree.list.length);
-	LT.editRule(tree, 'div a')
+	tree.editRule('div a')
 	assert.equal(lenA, tree.list.length);
-	LT.editRule(tree, 'div a:hover')
+	tree.editRule('div a:hover')
 	assert.equal(lenA+1, tree.list.length);
-	LT.editRule(tree, 'div .class')
+	tree.editRule('div .class')
 	assert.equal(lenA+2, tree.list.length);
-	LT.editRule(tree, 'div.class')
+	tree.editRule('div.class')
 	assert.equal(lenA+3, tree.list.length);
-	LT.editRule(tree, 'div, a')
+	tree.editRule('div, a')
 	assert.equal(lenA+3, tree.list.length);
-	LT.editRule(tree, 'div, a div')
+	tree.editRule('div, a div')
 	assert.equal(lenA+4, tree.list.length);
-	LT.editRule(tree, 'div a', false);
+	tree.editRule('div a', false);
 	assert.equal(lenB, tree.listOut.length)
-	LT.editRule(tree, 'div a:cover', false)
+	tree.editRule('div a:cover', false)
 	assert.equal(lenB+1, tree.listOut.length);
 
-	LT.editRule(tree, 2);
+	tree.editRule(2);
 	assert.equal(lenA+3, tree.list.length);
-	LT.editRule(tree, 0, false);
+	tree.editRule(0, false);
 	assert.equal(lenB, tree.listOut.length);
 
 	//tree check
 	var
 		expected = fs.readFileSync(__dirname+'/expected.less', 'utf-8').replace(/\s/g,''),
-		result = LT.toLess(tree).replace(/\s/g,'');
+		result = tree.toLess().replace(/\s/g,'');
 
 	assert.equal(expected, result);
 
@@ -82,7 +82,7 @@ LT.loadStyle(__dirname+'/test.less', function(err, tree){
 		if(fs.existsSync(__dirname+'/results/result'+i+'.less')){
 			test = fs.readFileSync(__dirname+'/results/result'+i+'.less', 'utf-8');
 			less.parse(test, function(err, tree){
-				result = LT.toLess(tree);
+				result = lt.toLess(tree);
 			});
 			result = result.replace(/\r\n/g, '\n').split('\n');
 			test = test.replace(/\r\n/g, '\n').split('\n');

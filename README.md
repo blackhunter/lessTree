@@ -17,13 +17,13 @@ npm install git://github.com/blackhunter/lessTree.git
 * **path** - .less file's path
 * **tree** - object parsed with less.Parser
 
-return: **sheet object**
+**return: sheet object**
 
 ### lessTree.toLess(path, tree)
 * **path** - .less file's path
 * **tree** - object parsed with less.Parser
 
-return: tree object converted back to less
+**return: tree object converted back to less**
 
 
 ## sheet object
@@ -55,7 +55,7 @@ return: tree object converted back to less
 
 ### sheet.toLess()
 
-return: tree object converted back to less
+**return: tree object converted back to less**
 
 
 ## usage:
@@ -65,9 +65,9 @@ return: tree object converted back to less
 		if(err)
 			throw err;
 		else{
-			tl.editSelector(sheet, 'div a');	//now as last index of list array
-			tl.editRule(sheet, 'div a', {name: 'color', value: 'red!important'});	//and have "color" prop
-			tl.saveStyle(sheet);	//save changes
+			sheet.editSelector('div a');	//now as last index of list array
+			sheet.editRule('div a', {name: 'color', value: 'red!important'});	//and have "color" prop
+			sheet.saveStyle();	//rewrite file
 		}
 	})
 ```

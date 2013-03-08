@@ -15,7 +15,7 @@
 		"url": "https://github.com/blackhunter/lessTree.git"
 	},
 	"dependencies": {
-		"less": "git://github.com/blackhunter/lessTree.git"
+		"less": "git://github.com/cloudhead/less.js.git"
 	},
 	"keywords": [
 		"node.js",

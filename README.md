@@ -57,6 +57,9 @@ npm install git://github.com/blackhunter/lessTree.git
 
 **return: tree object converted back to less**
 
+### sheet.toCSS()
+
+**return: css text**
 
 ## usage:
 ``` js

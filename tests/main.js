@@ -4,7 +4,7 @@ var
 	less =  new (require('less').Parser),
 	fs = require('fs');
 
-lt.loadStyle(__dirname+'/test.less', function(err, tree){
+lt.load(__dirname+'/test.less', function(err, tree){
 	//load and mapLess tests
 	assert('list' in tree);
 	assert.equal(tree.list.length, 3);
